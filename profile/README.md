@@ -8,12 +8,24 @@ This org brings OTP-style supervision and crash-only design to the Ruby/Rails ec
 
 ## Repos
 
-- **`otp-rails`** — the supervisor. Zero runtime dependencies; never loads Rails.
-- **`otp-rails-resilience`** — breakers, bulkheads, and crash-only conventions wired into ActiveRecord, Net::HTTP, and Redis.
-- **`otp-rails-template`** — a `rails new` template with chaos tests that kill each process and assert recovery.
-- **`beam`** — optional Elixir sidecar: supervises Rails processes as Ports, shares a job queue, fronts channels.
+Start with **[odoshi](https://github.com/shishi-odoshi/odoshi)** — everything else is optional.
+
+| Repo | What it is | You want it if… |
+|---|---|---|
+| **[odoshi](https://github.com/shishi-odoshi/odoshi)** | The supervisor. Zero runtime dependencies; never loads Rails. [On RubyGems](https://rubygems.org/gems/odoshi). | …you have a Rails app whose processes should survive crashes |
+| **[odoshi-template](https://github.com/shishi-odoshi/odoshi-template)** | A `rails new` template with chaos tasks that kill each process and assert recovery under 10s | …you want a working supervised app in one command |
+| **[odoshi-resilience](https://github.com/shishi-odoshi/odoshi-resilience)** | Circuit breakers, a telemetry bridge, `Rails.supervisor.restart!`, and `bin/rails boot:check` | …you want crash-only conventions inside the app, not just around it |
+| **[beam](https://github.com/shishi-odoshi/beam)** | Optional Elixir sidecar: supervises Rails processes as Ports, runs Solid Queue jobs, serves ActionCable-compatible channels | …you want BEAM concurrency beside Rails, sharing one Postgres |
+| **[odoshi-bench](https://github.com/shishi-odoshi/odoshi-bench)** | Honest benchmarks vs foreman, overmind, `docker compose restart`, and bare | …you want the numbers before you trust the claims |
+| **[odoshi-integration](https://github.com/shishi-odoshi/odoshi-integration)** | The whole stack running together under chaos, re-generated from source every CI run | …you want to see all of it work as one system |
 
 Rails users never need the Elixir layer. Elixir users never need to read Ruby.
+
+> Formerly published as `otp-rails`. Renamed in September 2026 — "otp" reads as *one-time password* in Rubyland, and this project's OTP was always the Erlang kind. Old repo URLs redirect; the `otp-rails` gem is a pointer release.
+
+## Roadmap
+
+Planned work lives on the [org roadmap board](https://github.com/orgs/shishi-odoshi/projects/1), grouped by milestone.
 
 ## Lineage
 
